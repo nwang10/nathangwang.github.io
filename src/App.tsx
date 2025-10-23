@@ -11,7 +11,7 @@ function App() {
   const [easterEggActive, setEasterEggActive] = useState(false);
 
   return (
-    <Router>
+    <Router basename="/nathangwang.github.io">
       <ThemeController />
       <div className="relative">
         <Header onLogoTripleClick={() => setEasterEggActive(!easterEggActive)} />
