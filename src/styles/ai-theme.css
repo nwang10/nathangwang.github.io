@@ -1,0 +1,94 @@
+/* Over-the-top AI-generated theme for Easter egg */
+.ai-mode {
+  --color-primary: #ff00ff;
+  --color-secondary: #00ffff;
+  --color-accent: #ffff00;
+  --color-bg: #000033;
+  --color-text: #00ff00;
+}
+
+.ai-mode * {
+  font-family: 'Comic Sans MS', cursive, sans-serif !important;
+}
+
+.ai-mode h1,
+.ai-mode h2,
+.ai-mode h3 {
+  text-shadow: 0 0 10px var(--color-accent), 0 0 20px var(--color-accent), 0 0 30px var(--color-accent);
+  animation: rainbow 3s linear infinite, pulse 1s ease-in-out infinite;
+}
+
+.ai-mode button,
+.ai-mode a {
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+  background-size: 300% 300%;
+  animation: gradient-shift 3s ease infinite;
+  border: 3px solid #00ff00;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+}
+
+.ai-mode .glass-effect {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3));
+  backdrop-filter: blur(20px) brightness(1.5);
+  border: 3px solid rgba(255, 255, 0, 0.5);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+}
+
+@keyframes rainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* AI Output Log Ticker */
+.ai-log-ticker {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 300px;
+  max-height: 150px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'Courier New', monospace !important;
+  color: #00ff00;
+  font-size: 11px;
+  overflow-y: auto;
+  z-index: 10000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.ai-log-ticker::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ai-log-ticker::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 3px;
+}
+
+.ai-log-entry {
+  margin-bottom: 5px;
+  animation: flicker 0.3s ease-in;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.ai-log-entry span {
+  color: #00ffff;
+  font-weight: bold;
+}

@@ -1,0 +1,60 @@
+{
+  "github": {
+    "lastCommit": {
+      "repo": "nathan-wang-portfolio",
+      "message": "Add interactive AI chat orb with intent routing",
+      "timestamp": "2025-01-15T14:30:00Z",
+      "url": "https://github.com/nwang10/nathan-wang-portfolio"
+    },
+    "stats": {
+      "publicRepos": 24,
+      "followers": 48,
+      "following": 32
+    }
+  },
+  "spotify": {
+    "currentlyPlaying": {
+      "track": "Levels",
+      "artist": "Avicii",
+      "album": "Levels",
+      "isPlaying": true,
+      "timestamp": "2025-01-15T14:25:00Z"
+    },
+    "recentTracks": [
+      {
+        "track": "Strobe",
+        "artist": "deadmau5"
+      },
+      {
+        "track": "One More Time",
+        "artist": "Daft Punk"
+      }
+    ]
+  },
+  "status": {
+    "message": "Building the future, one commit at a time 🚀",
+    "emoji": "💻",
+    "available": true,
+    "lastUpdated": "2025-01-15T10:00:00Z"
+  },
+  "reading": [
+    {
+      "title": "Designing Data-Intensive Applications",
+      "author": "Martin Kleppmann",
+      "progress": 65,
+      "url": "https://dataintensive.net/"
+    },
+    {
+      "title": "Deep Learning with PyTorch",
+      "author": "Eli Stevens",
+      "progress": 82,
+      "url": "https://pytorch.org/deep-learning-with-pytorch"
+    }
+  ],
+  "location": {
+    "city": "Madison",
+    "state": "WI",
+    "timezone": "America/Chicago",
+    "weather": "Partly cloudy, 45°F"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "greetings": [
+    "Hey, I'm Nathan! What do you want to explore?",
+    "Hi there! I'm Nathan. How can I help you learn more about my work?",
+    "Welcome! I'm Nathan. What interests you?"
+  ],
+  "intents": {
+    "projects": {
+      "response": "I've built some exciting projects including:\n\n• **AttentioFlow AI**: A real-time PyTorch system for cognitive optimization with proactive AI nudges\n• **Fetch Product Prototype**: Rapid product workflow demo presented to the CEO and Chief of Staff\n• **UFO Sightings Analysis**: NLP analysis of 80,000+ UFO descriptions with clustering and sentiment analysis\n\nWant to dive deeper into any of these?",
+      "followUp": ["Tell me more about AttentioFlow", "What's the Fetch prototype?", "UFO Analysis details"]
+    },
+    "internships": {
+      "response": "I've had amazing internship experiences:\n\n• **AT&T** (Summer '25): Migrated 100M+ docs with Spring Boot, built Python automation, invented patent-pending AI network analyzer\n• **Lumen Technologies** (Summer '24): Built REST APIs with Django, optimized backend scripts\n• **UW–Madison Cybersecurity** (Spring '24): Deployed Palo Alto firewalls, directed 150+ incident responses\n• **Exact Sciences** (2023): Automated CrowdStrike decommissions, saved $140K through account optimization\n\nWhich one sounds interesting?",
+      "followUp": ["Tell me about AT&T", "Lumen experience", "Cybersecurity work"]
+    },
+    "experience": {
+      "response": "I've had amazing internship experiences:\n\n• **AT&T** (Summer '25): Migrated 100M+ docs with Spring Boot, built Python automation, invented patent-pending AI network analyzer\n• **Lumen Technologies** (Summer '24): Built REST APIs with Django, optimized backend scripts\n• **UW–Madison Cybersecurity** (Spring '24): Deployed Palo Alto firewalls, directed 150+ incident responses\n• **Exact Sciences** (2023): Automated CrowdStrike decommissions, saved $140K through account optimization\n\nWhich one sounds interesting?",
+      "followUp": ["Tell me about AT&T", "Lumen experience", "Cybersecurity work"]
+    },
+    "ai": {
+      "response": "I'm passionate about practical AI applications! I love rapid prototyping with modern AI tools and building working demos.\n\n**AttentioFlow AI** is my flagship project—a PyTorch-powered system that performs real-time inference to predict cognitive states and deploy proactive nudges for attentional regulation.\n\nI also invented a patent-pending AI network analyzer at AT&T for automated incident response.\n\nAI should be useful, not just impressive!",
+      "followUp": ["Show me your projects", "What's your AI philosophy?", "Technical skills"]
+    },
+    "contact": {
+      "response": "Let's connect!\n\n📧 **Email**: ngwang@wisc.edu\n💼 **LinkedIn**: linkedin.com/in/nathangwang\n💻 **GitHub**: github.com/nwang10\n📱 **Phone**: (331) 229-7983\n📍 **Location**: Madison, WI\n\nI'm always open to interesting opportunities and conversations!",
+      "followUp": ["View my resume", "See my GitHub", "Explore projects"]
+    },
+    "skills": {
+      "response": "I work with a diverse tech stack:\n\n**Languages**: Python, Java, JavaScript, TypeScript, SQL, HTML/CSS, VBA\n**Frameworks**: Django, Spring Boot, React, PyTorch\n**Tools**: Docker, Git, MongoDB, Postman, VS Code\n**Libraries**: Pandas, NumPy, Matplotlib, PyMongo, BeautifulSoup4\n**Technologies**: Active Directory, Okta, ServiceNow, CrowdStrike, Itential\n\nI pick up new tech quickly and love learning!",
+      "followUp": ["Show me your projects", "View experience", "GitHub profile"]
+    },
+    "surprise": {
+      "response": "Want something fun? Try these:\n\n🎮 Check out the **gamified timeline** for an interactive journey through my experiences—unlock nodes to earn XP!\n\n🎨 **Triple-click the logo** in the header to toggle a hilarious \"AI-generated\" theme that shows what happens when AI goes wild with design.\n\n🌓 The site theme automatically adapts to **time of day**—morning, day, or night!\n\n⚡ Move your cursor fast and watch the **ambient effects** respond to your speed!\n\nHave fun exploring!",
+      "followUp": ["Show me the timeline", "What else can you do?", "Tell me about yourself"]
+    },
+    "about": {
+      "response": "I'm Nathan Wang, a Computer Science and Business student at UW–Madison (graduating May 2026).\n\nI **build useful software and ship fast**. I've worked at companies like AT&T, Lumen Technologies, and Exact Sciences, tackling everything from large-scale data migrations to cybersecurity automation.\n\nI love rapid prototyping, AI applications, and creating tools that solve real problems. When I'm not coding, I'm exploring new technologies and finding ways to make them practical.\n\nCurrently taking Big Data, AI, and Mobile App Development courses!",
+      "followUp": ["See my experience", "View projects", "Technical skills"]
+    },
+    "education": {
+      "response": "🎓 **University of Wisconsin–Madison**\nBachelor of Business Administration in Computer Science and Business\n📅 Sept 2022 – May 2026\n📍 Madison, WI\n\n**Current Coursework**: Big Data Systems, Artificial Intelligence, Mobile Application Development\n\nThe unique CS + Business combo gives me both technical chops and business acumen!",
+      "followUp": ["View my experience", "See projects", "Technical skills"]
+    },
+    "attentioflow": {
+      "response": "**AttentioFlow AI** (Oct 2024 – Present)\n\nAn adaptive AI system for cognitive optimization:\n\n✨ Real-time inference with PyTorch Neural Network\n🖥️ Tkinter-based interface for easy interaction\n🧠 Engineered temporal features from digital interaction data (psutil, pynput)\n🚀 Proactive AI nudges (plyer) for attentional regulation\n💾 PyTorch model persistence with torch.save/load\n\nIt's all about predicting distraction onset and helping people stay focused through adaptive human-computer interaction!",
+      "followUp": ["Other projects", "Your AI work", "Technical details"]
+    },
+    "fetch": {
+      "response": "**Fetch Product Prototype**\n\nA rapid product workflow prototype that I built and demoed directly to the **Fetch CEO and Chief of Staff**.\n\nThis project showcases my ability to:\n• Rapidly prototype product ideas\n• Build user-facing applications\n• Communicate technical work to executives\n• Ship fast and iterate based on feedback\n\nIt was an incredible learning experience in product development and stakeholder communication!",
+      "followUp": ["Other projects", "Your experience", "Skills"]
+    },
+    "ufo": {
+      "response": "**UFO Sightings Analysis** (Sept 2022 – May 2023)\n\nA comprehensive NLP project analyzing 80,000+ UFO sighting descriptions:\n\n📊 Natural Language Processing with Python & NLTK\n🔍 K-Means clustering for pattern detection\n😊 Sentiment analysis using Naive Bayes, Logistic Regression, SVM\n📈 Predictive analytics with linear regression to forecast encounters\n🗺️ Geospatial coordinate analysis\n\nTurns out, the truth IS out there... in the data!",
+      "followUp": ["Other projects", "Technical skills", "Your AI work"]
+    },
+    "default": {
+      "response": "I'm not sure I understood that. Here are some things you can ask me about:",
+      "followUp": ["Your projects", "Your experience", "Your skills", "How to contact you"]
+    }
+  }
+}
