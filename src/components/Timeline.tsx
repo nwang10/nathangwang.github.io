@@ -167,43 +167,43 @@ export const Timeline: React.FC = () => {
           </motion.div>
         )}
 
-        {/* Confetti effect */}
+        {/* Confetti effect - optimized */}
         {showConfetti && (
           <div className="fixed inset-0 pointer-events-none z-50">
-            {[...Array(100)].map((_, i) => {
-              const colors = ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981', '#ef4444', '#ec4899'];
-              const shapes = ['circle', 'square', 'triangle'];
-              const shape = shapes[i % 3];
-              const size = 4 + Math.random() * 8; // Varied sizes: 4px to 12px
-              const startX = Math.random() * 100;
-              const wobble = (Math.random() - 0.5) * 200; // Horizontal wobble
+            {[...Array(30)].map((_, i) => {
+              // Pre-calculate values to avoid doing it during render
+              const colors = ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981'];
+              const color = colors[i % colors.length];
+              const size = i % 2 === 0 ? 6 : 8; // Only 2 sizes
+              const startX = (i * 3.33) % 100; // Evenly distributed
+              const wobble = ((i % 3) - 1) * 100; // Simplified wobble: -100, 0, or 100
+              const duration = 2 + (i % 3); // 2, 3, or 4 seconds
+              const delay = (i % 5) * 0.1; // 0 to 0.4s delay
 
               return (
                 <motion.div
                   key={i}
                   className="absolute"
                   style={{
-                    backgroundColor: colors[i % colors.length],
+                    backgroundColor: color,
                     width: `${size}px`,
                     height: `${size}px`,
-                    borderRadius: shape === 'circle' ? '50%' : shape === 'square' ? '2px' : '0',
-                    clipPath: shape === 'triangle' ? 'polygon(50% 0%, 0% 100%, 100% 100%)' : 'none',
+                    borderRadius: i % 2 === 0 ? '50%' : '2px', // Circle or square only
                     left: `${startX}%`,
                     top: '-20px',
-                    boxShadow: `0 0 ${size * 2}px ${colors[i % colors.length]}`
+                    willChange: 'transform, opacity'
                   }}
-                  initial={{ y: 0, x: 0, opacity: 1, rotate: 0, scale: 1 }}
+                  initial={{ y: 0, x: 0, opacity: 1, rotate: 0 }}
                   animate={{
                     y: window.innerHeight + 100,
                     x: wobble,
                     opacity: 0,
-                    rotate: Math.random() * 720 - 360, // Rotate between -360 and 360
-                    scale: [1, 1.2, 0.8, 1]
+                    rotate: (i % 2 === 0 ? 360 : -360) // Simple rotation
                   }}
                   transition={{
-                    duration: 2.5 + Math.random() * 2.5, // 2.5 to 5 seconds
-                    delay: Math.random() * 0.8,
-                    ease: 'easeIn'
+                    duration,
+                    delay,
+                    ease: 'linear'
                   }}
                 />
               );
