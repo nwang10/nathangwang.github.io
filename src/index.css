@@ -8,24 +8,43 @@
   --color-accent: #6366f1;
   --color-accent-hover: #4f46e5;
   --color-bg: #fafafa;
+  --color-bg-gradient-start: #fafafa;
+  --color-bg-gradient-end: #ffffff;
   --color-surface: #ffffff;
   --color-text: #0f172a;
   --color-text-muted: #64748b;
   --color-border: rgba(15, 23, 42, 0.08);
   --cursor-speed: 0;
+  --accent-intensity: 1;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+  /* Smooth transitions for all color properties */
+  transition:
+    --color-primary 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-secondary 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-accent 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-accent-hover 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-bg 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-bg-gradient-start 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-bg-gradient-end 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-surface 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-text 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-text-muted 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    --color-border 380ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Time-based themes */
+/* Time-based themes with gradient backgrounds */
 html.morning {
   --color-primary: #0f172a;
   --color-secondary: #64748b;
   --color-accent: #f59e0b;
   --color-accent-hover: #d97706;
   --color-bg: #fffbeb;
+  --color-bg-gradient-start: #fffbeb;
+  --color-bg-gradient-end: #fef3c7;
   --color-surface: #ffffff;
   --color-text: #0f172a;
   --color-text-muted: #78716c;
@@ -38,6 +57,8 @@ html.day {
   --color-accent: #6366f1;
   --color-accent-hover: #4f46e5;
   --color-bg: #fafafa;
+  --color-bg-gradient-start: #fafafa;
+  --color-bg-gradient-end: #f0f9ff;
   --color-surface: #ffffff;
   --color-text: #0f172a;
   --color-text-muted: #64748b;
@@ -50,6 +71,8 @@ html.night {
   --color-accent: #818cf8;
   --color-accent-hover: #a5b4fc;
   --color-bg: #0a0f1e;
+  --color-bg-gradient-start: #0a0f1e;
+  --color-bg-gradient-end: #1e1b4b;
   --color-surface: #1e293b;
   --color-text: #f1f5f9;
   --color-text-muted: #94a3b8;
@@ -68,12 +91,16 @@ html.night {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: var(--color-bg);
+  background: linear-gradient(180deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
+  background-attachment: fixed;
   color: var(--color-text);
-  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background 380ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 380ms cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 /* Smooth scroll */
@@ -275,4 +302,41 @@ a:not(.no-underline):hover::after {
   );
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
+}
+
+/* Cursor-reactive accent intensity */
+/* Applies subtle brightness boost to accent colors based on cursor movement */
+.accent-reactive {
+  filter: brightness(var(--accent-intensity));
+  transition: filter 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus styles with cursor reactivity */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: calc(3px * var(--accent-intensity));
+  border-radius: 4px;
+  transition:
+    outline-offset 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    outline-color 380ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced gradient text with cursor reactivity */
+.gradient-text {
+  filter: brightness(var(--accent-intensity));
+  transition: filter 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Link underlines react to cursor speed */
+a:not(.no-underline)::after {
+  opacity: calc(0.7 + (var(--cursor-speed) * 0.3));
+  transition:
+    width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scrollbar thumb reactivity */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+  filter: brightness(var(--accent-intensity));
 }

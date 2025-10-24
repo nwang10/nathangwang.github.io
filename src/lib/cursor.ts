@@ -3,7 +3,13 @@ export class CursorSpeedTracker {
   private lastY: number = 0;
   private lastTime: number = Date.now();
   private speed: number = 0;
+  private smoothedSpeed: number = 0;
   private rafId: number | null = null;
+
+  // Clamping thresholds
+  private readonly MIN_SPEED = 0.05; // Ignore very slow movements
+  private readonly MAX_SPEED = 1.5; // Cap at 1.5 pixels/ms
+  private readonly SPEED_SMOOTHING = 0.15; // Lower = smoother transitions
 
   constructor() {
     this.handleMouseMove = this.handleMouseMove.bind(this);
@@ -26,17 +32,28 @@ export class CursorSpeedTracker {
     const now = Date.now();
     const dt = now - this.lastTime;
 
-    if (dt === 0) return;
+    // Only calculate if enough time has passed
+    if (dt === 0 || dt > 100) {
+      this.lastX = e.clientX;
+      this.lastY = e.clientY;
+      this.lastTime = now;
+      return;
+    }
 
     const dx = e.clientX - this.lastX;
     const dy = e.clientY - this.lastY;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    // Calculate speed (pixels per millisecond, then normalized)
+    // Calculate raw speed (pixels per millisecond)
     const rawSpeed = distance / dt;
 
-    // Normalize speed to 0-1 range (cap at 2 pixels/ms for very fast movements)
-    this.speed = Math.min(rawSpeed / 2, 1);
+    // Apply clamping with better thresholds
+    if (rawSpeed < this.MIN_SPEED) {
+      this.speed = 0;
+    } else {
+      // Normalize to 0-1 range with clamped max
+      this.speed = Math.min(rawSpeed / this.MAX_SPEED, 1);
+    }
 
     this.lastX = e.clientX;
     this.lastY = e.clientY;
@@ -44,17 +61,28 @@ export class CursorSpeedTracker {
   }
 
   private updateCSSVariable(): void {
-    // Gradually decrease speed when not moving
-    this.speed *= 0.95;
+    // Smooth the speed value to avoid jitter
+    this.smoothedSpeed += (this.speed - this.smoothedSpeed) * this.SPEED_SMOOTHING;
 
-    // Set CSS variable for use in styles
-    document.documentElement.style.setProperty('--cursor-speed', this.speed.toString());
+    // Gradually decrease speed when not moving
+    this.speed *= 0.92;
+
+    // Clamp to prevent visual noise
+    const clampedSpeed = Math.max(0, Math.min(1, this.smoothedSpeed));
+
+    // Calculate accent intensity (1.0 to 1.25 based on cursor speed)
+    // Subtle boost to avoid overwhelming the design
+    const accentIntensity = 1 + (clampedSpeed * 0.25);
+
+    // Set CSS variables for use in styles
+    document.documentElement.style.setProperty('--cursor-speed', clampedSpeed.toFixed(3));
+    document.documentElement.style.setProperty('--accent-intensity', accentIntensity.toFixed(3));
 
     this.rafId = requestAnimationFrame(this.updateCSSVariable);
   }
 
   getSpeed(): number {
-    return this.speed;
+    return this.smoothedSpeed;
   }
 }
 
