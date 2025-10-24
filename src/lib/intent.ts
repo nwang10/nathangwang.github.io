@@ -1,4 +1,5 @@
 import kbData from '../data/kb.json';
+import { getRandomSurprise } from '../data/surprises';
 
 export interface IntentResponse {
   response: string;
@@ -39,8 +40,15 @@ export const matchIntent = (userInput: string): IntentResponse => {
       const intentData = kbData.intents[intent as keyof typeof kbData.intents];
 
       if (typeof intentData === 'object' && 'response' in intentData) {
+        let response = intentData.response;
+
+        // Handle surprise template
+        if (response === '{{surprise}}') {
+          response = getRandomSurprise();
+        }
+
         return {
-          response: intentData.response,
+          response,
           followUp: intentData.followUp
         };
       } else if (typeof intentData === 'string') {

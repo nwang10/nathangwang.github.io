@@ -23,10 +23,17 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      // Show initial greeting with typewriter effect
+      // Show initial greeting with a friendly touch
+      const greetings = [
+        "Hey! 👋 I'm Nathan's AI assistant. Think of me as the friendly guide to his work. What catches your interest?",
+        "Welcome! I'm here to help you explore Nathan's projects, experience, and skills. What would you like to know?",
+        "Hi there! I've got the inside scoop on Nathan's work. Ask me anything!"
+      ];
+      const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+
       setTimeout(() => {
-        addAssistantMessage("Hey, I'm Nathan! What do you want to explore?", getQuickReplies());
-      }, 300);
+        addAssistantMessage(greeting, getQuickReplies());
+      }, 400);
     }
   }, [isOpen]);
 
@@ -54,6 +61,13 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose }) => {
 
   const addAssistantMessage = (text: string, followUp?: string[]) => {
     setIsTyping(true);
+
+    // Realistic typing delay based on message length
+    // Average typing speed: ~50 words per minute = ~250 chars per minute
+    const baseDelay = 600;
+    const charDelay = text.length * 8; // 8ms per character
+    const typingDelay = Math.min(baseDelay + charDelay, 2500); // Cap at 2.5 seconds
+
     setTimeout(() => {
       setMessages(prev => [
         ...prev,
@@ -65,7 +79,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose }) => {
         }
       ]);
       setIsTyping(false);
-    }, 500);
+    }, typingDelay);
   };
 
   const handleSendMessage = (text: string) => {
@@ -145,49 +159,94 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose }) => {
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.map(message => (
+              {messages.map((message, index) => (
                 <motion.div
                   key={message.id}
                   className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 500,
+                    damping: 30,
+                    delay: index * 0.05
+                  }}
                 >
                   <div
-                    className={`max-w-[80%] px-4 py-2 rounded-2xl ${
+                    className={`max-w-[80%] px-4 py-3 rounded-2xl shadow-md ${
                       message.sender === 'user'
                         ? 'rounded-br-none'
                         : 'rounded-bl-none'
                     }`}
                     style={{
-                      backgroundColor: message.sender === 'user' ? 'var(--color-accent)' : 'var(--color-secondary)',
-                      color: 'white'
+                      backgroundColor: message.sender === 'user' ? 'var(--color-accent)' : 'var(--color-surface)',
+                      color: message.sender === 'user' ? 'white' : 'var(--color-text)',
+                      border: message.sender === 'assistant' ? '1px solid var(--color-border)' : 'none'
                     }}
                   >
-                    <p className="text-sm whitespace-pre-line">{message.text}</p>
+                    <div className="text-sm whitespace-pre-line">
+                      {message.text.split('```').map((part, i) => {
+                        if (i % 2 === 1) {
+                          // Code block
+                          const lines = part.split('\n');
+                          const code = lines.slice(1).join('\n');
+                          return (
+                            <pre
+                              key={i}
+                              className="bg-gray-900 text-gray-100 p-3 rounded-lg overflow-x-auto text-xs my-2"
+                            >
+                              <code>{code}</code>
+                            </pre>
+                          );
+                        }
+                        // Regular text with markdown bold support
+                        return part.split(/(\*\*.*?\*\*)/).map((segment, j) => {
+                          if (segment.startsWith('**') && segment.endsWith('**')) {
+                            return <strong key={`${i}-${j}`}>{segment.slice(2, -2)}</strong>;
+                          }
+                          return <span key={`${i}-${j}`}>{segment}</span>;
+                        });
+                      })}
+                    </div>
                   </div>
                 </motion.div>
               ))}
 
               {/* Follow-up chips */}
-              {messages.length > 0 && messages[messages.length - 1].followUp && (
+              {messages.length > 0 && messages[messages.length - 1].followUp && !isTyping && (
                 <motion.div
                   className="flex flex-wrap gap-2"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
                 >
                   {messages[messages.length - 1].followUp!.map((chip, index) => (
-                    <button
+                    <motion.button
                       key={index}
                       onClick={() => handleQuickReply(chip)}
-                      className="px-3 py-1 rounded-full text-sm border-2 transition-all hover:scale-105"
+                      className="px-3 py-2 rounded-full text-sm font-medium no-underline"
                       style={{
-                        borderColor: 'var(--color-accent)',
-                        color: 'var(--color-accent)'
+                        border: '2px solid var(--color-accent)',
+                        color: 'var(--color-accent)',
+                        backgroundColor: 'transparent',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--color-accent)';
+                        e.currentTarget.style.color = 'white';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--color-accent)';
                       }}
                     >
                       {chip}
-                    </button>
+                    </motion.button>
                   ))}
                 </motion.div>
               )}
@@ -195,29 +254,41 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose }) => {
               {/* Typing indicator */}
               {isTyping && (
                 <motion.div
-                  className="flex justify-start"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  className="flex justify-start items-center space-x-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
                 >
                   <div
-                    className="px-4 py-2 rounded-2xl rounded-bl-none flex space-x-1"
-                    style={{ backgroundColor: 'var(--color-secondary)' }}
+                    className="px-4 py-3 rounded-2xl rounded-bl-none flex items-center space-x-2 shadow-md"
+                    style={{
+                      backgroundColor: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)'
+                    }}
                   >
-                    <motion.div
-                      className="w-2 h-2 bg-white rounded-full"
-                      animate={{ y: [0, -5, 0] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: 0 }}
-                    />
-                    <motion.div
-                      className="w-2 h-2 bg-white rounded-full"
-                      animate={{ y: [0, -5, 0] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }}
-                    />
-                    <motion.div
-                      className="w-2 h-2 bg-white rounded-full"
-                      animate={{ y: [0, -5, 0] }}
-                      transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }}
-                    />
+                    <div className="flex space-x-1">
+                      <motion.div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: 'var(--color-accent)' }}
+                        animate={{ y: [0, -6, 0], opacity: [1, 0.5, 1] }}
+                        transition={{ repeat: Infinity, duration: 0.8, delay: 0 }}
+                      />
+                      <motion.div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: 'var(--color-accent)' }}
+                        animate={{ y: [0, -6, 0], opacity: [1, 0.5, 1] }}
+                        transition={{ repeat: Infinity, duration: 0.8, delay: 0.2 }}
+                      />
+                      <motion.div
+                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: 'var(--color-accent)' }}
+                        animate={{ y: [0, -6, 0], opacity: [1, 0.5, 1] }}
+                        transition={{ repeat: Infinity, duration: 0.8, delay: 0.4 }}
+                      />
+                    </div>
+                    <span className="text-xs ml-2" style={{ color: 'var(--color-text-muted)' }}>
+                      Nathan's assistant is typing...
+                    </span>
                   </div>
                 </motion.div>
               )}

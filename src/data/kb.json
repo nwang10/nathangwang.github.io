@@ -1,13 +1,13 @@
 {
   "greetings": [
-    "Hey, I'm Nathan! What do you want to explore?",
-    "Hi there! I'm Nathan. How can I help you learn more about my work?",
-    "Welcome! I'm Nathan. What interests you?"
+    "Hey! 👋 I'm Nathan's AI assistant. Think of me as the friendly guide to his work. What catches your interest?",
+    "Welcome! I'm here to help you explore Nathan's projects, experience, and skills. What would you like to know?",
+    "Hi there! I've got the inside scoop on Nathan's work. Ask me anything!"
   ],
   "intents": {
     "projects": {
-      "response": "I've built some exciting projects including:\n\n• **AttentioFlow AI**: A real-time PyTorch system for cognitive optimization with proactive AI nudges\n• **Fetch Product Prototype**: Rapid product workflow demo presented to the CEO and Chief of Staff\n• **UFO Sightings Analysis**: NLP analysis of 80,000+ UFO descriptions with clustering and sentiment analysis\n\nWant to dive deeper into any of these?",
-      "followUp": ["Tell me more about AttentioFlow", "What's the Fetch prototype?", "UFO Analysis details"]
+      "response": "Ah, the good stuff! Nathan loves building things that actually work. Here are his favorites:\n\n🧠 **AttentioFlow AI** - A PyTorch-powered system that predicts when you're about to get distracted and nudges you back on track. Real-time inference, custom neural networks, the whole deal.\n\n📱 **Fetch Prototype** - Built a product demo so good, he presented it directly to the CEO and Chief of Staff. Talk about shipping fast!\n\n👽 **UFO Sightings Analysis** - Because who doesn't want to analyze 80,000+ UFO reports with NLP? K-Means clustering, sentiment analysis, the works.\n\nWhich one sounds interesting?",
+      "followUp": ["Tell me about AttentioFlow", "The Fetch story", "UFO project details", "Surprise me"]
     },
     "internships": {
       "response": "I've had amazing internship experiences:\n\n• **AT&T** (Summer '25): Migrated 100M+ docs with Spring Boot, built Python automation, invented patent-pending AI network analyzer\n• **Lumen Technologies** (Summer '24): Built REST APIs with Django, optimized backend scripts\n• **UW–Madison Cybersecurity** (Spring '24): Deployed Palo Alto firewalls, directed 150+ incident responses\n• **Exact Sciences** (2023): Automated CrowdStrike decommissions, saved $140K through account optimization\n\nWhich one sounds interesting?",
@@ -30,8 +30,8 @@
       "followUp": ["Show me your projects", "View experience", "GitHub profile"]
     },
     "surprise": {
-      "response": "Want something fun? Try these:\n\n🎮 Check out the **gamified timeline** for an interactive journey through my experiences—unlock nodes to earn XP!\n\n🎨 **Triple-click the logo** in the header to toggle a hilarious \"AI-generated\" theme that shows what happens when AI goes wild with design.\n\n🌓 The site theme automatically adapts to **time of day**—morning, day, or night!\n\n⚡ Move your cursor fast and watch the **ambient effects** respond to your speed!\n\nHave fun exploring!",
-      "followUp": ["Show me the timeline", "What else can you do?", "Tell me about yourself"]
+      "response": "{{surprise}}",
+      "followUp": ["Another surprise!", "Tell me about projects", "What else?", "Your experience"]
     },
     "about": {
       "response": "I'm Nathan Wang, a Computer Science and Business student at UW–Madison (graduating May 2026).\n\nI **build useful software and ship fast**. I've worked at companies like AT&T, Lumen Technologies, and Exact Sciences, tackling everything from large-scale data migrations to cybersecurity automation.\n\nI love rapid prototyping, AI applications, and creating tools that solve real problems. When I'm not coding, I'm exploring new technologies and finding ways to make them practical.\n\nCurrently taking Big Data, AI, and Mobile App Development courses!",
