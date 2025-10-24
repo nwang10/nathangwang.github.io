@@ -95,26 +95,49 @@ export const Hero: React.FC = () => {
           >
             <motion.button
               onClick={scrollToProjects}
-              className="px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="px-8 py-3 rounded-full font-semibold no-underline relative overflow-hidden"
               style={{
                 backgroundColor: 'var(--color-accent)',
-                color: 'white'
+                color: 'white',
+                boxShadow: 'var(--shadow-lg)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
               }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: '0 20px 25px -5px rgba(99, 102, 241, 0.3)'
+              }}
+              whileTap={{ scale: 0.98 }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-accent)';
+              }}
             >
               View My Work
             </motion.button>
 
             <motion.a
               href="mailto:ngwang@wisc.edu"
-              className="px-8 py-3 rounded-full font-semibold transition-all duration-300 border-2"
+              className="px-8 py-3 rounded-full font-semibold no-underline relative overflow-hidden"
               style={{
-                borderColor: 'var(--color-accent)',
-                color: 'var(--color-accent)'
+                border: '2px solid var(--color-accent)',
+                color: 'var(--color-accent)',
+                backgroundColor: 'transparent',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
               }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{
+                scale: 1.05
+              }}
+              whileTap={{ scale: 0.98 }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-accent)';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.color = 'var(--color-accent)';
+              }}
             >
               Get In Touch
             </motion.a>

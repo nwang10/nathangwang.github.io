@@ -49,11 +49,23 @@ export const Header: React.FC<HeaderProps> = ({ onLogoTripleClick }) => {
           NW
         </button>
 
-        <ul className="hidden md:flex space-x-8">
+        <ul className="hidden md:flex space-x-1">
           <li>
             <button
               onClick={() => scrollToSection('projects')}
-              className="hover:text-accent transition-colors duration-200"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-10 no-underline"
+              style={{
+                color: 'var(--color-text-muted)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-accent)';
+                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               Projects
             </button>
@@ -61,7 +73,19 @@ export const Header: React.FC<HeaderProps> = ({ onLogoTripleClick }) => {
           <li>
             <button
               onClick={() => scrollToSection('experience')}
-              className="hover:text-accent transition-colors duration-200"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-10 no-underline"
+              style={{
+                color: 'var(--color-text-muted)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-accent)';
+                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               Experience
             </button>
@@ -69,7 +93,19 @@ export const Header: React.FC<HeaderProps> = ({ onLogoTripleClick }) => {
           <li>
             <button
               onClick={() => scrollToSection('skills')}
-              className="hover:text-accent transition-colors duration-200"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-10 no-underline"
+              style={{
+                color: 'var(--color-text-muted)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-accent)';
+                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               Skills
             </button>
@@ -77,7 +113,19 @@ export const Header: React.FC<HeaderProps> = ({ onLogoTripleClick }) => {
           <li>
             <a
               href="/now"
-              className="hover:text-accent transition-colors duration-200"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-10 no-underline inline-block"
+              style={{
+                color: 'var(--color-text-muted)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-accent)';
+                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               Now
             </a>
@@ -85,7 +133,19 @@ export const Header: React.FC<HeaderProps> = ({ onLogoTripleClick }) => {
           <li>
             <button
               onClick={() => scrollToSection('contact')}
-              className="hover:text-accent transition-colors duration-200"
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-10 no-underline"
+              style={{
+                color: 'var(--color-text-muted)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-accent)';
+                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               Contact
             </button>
