@@ -37,6 +37,21 @@
     "available": true,
     "lastUpdated": "2025-01-15T10:00:00Z"
   },
+  "currentActivity": {
+    "activities": [
+      { "text": "Currently coding in Python", "icon": "🐍" },
+      { "text": "Exploring PyTorch", "icon": "🔥" },
+      { "text": "Building with React", "icon": "⚛️" },
+      { "text": "Optimizing MongoDB queries", "icon": "🍃" },
+      { "text": "Designing REST APIs", "icon": "🔌" },
+      { "text": "Learning AI fundamentals", "icon": "🤖" },
+      { "text": "Refactoring Java Spring Boot", "icon": "☕" },
+      { "text": "Debugging network issues", "icon": "🔍" },
+      { "text": "Writing clean code", "icon": "✨" },
+      { "text": "Studying system design", "icon": "📐" }
+    ],
+    "currentIndex": 0
+  },
   "reading": [
     {
       "title": "Designing Data-Intensive Applications",
