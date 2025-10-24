@@ -2,6 +2,7 @@ export class CursorSpeedTracker {
   private lastX: number = 0;
   private lastY: number = 0;
   private lastTime: number = Date.now();
+  private lastUpdateTime: number = Date.now();
   private speed: number = 0;
   private smoothedSpeed: number = 0;
   private rafId: number | null = null;
@@ -10,6 +11,7 @@ export class CursorSpeedTracker {
   private readonly MIN_SPEED = 0.05; // Ignore very slow movements
   private readonly MAX_SPEED = 1.5; // Cap at 1.5 pixels/ms
   private readonly SPEED_SMOOTHING = 0.15; // Lower = smoother transitions
+  private readonly UPDATE_THROTTLE = 50; // Update CSS variable max once per 50ms
 
   constructor() {
     this.handleMouseMove = this.handleMouseMove.bind(this);
@@ -61,22 +63,29 @@ export class CursorSpeedTracker {
   }
 
   private updateCSSVariable(): void {
+    const now = Date.now();
+
     // Smooth the speed value to avoid jitter
     this.smoothedSpeed += (this.speed - this.smoothedSpeed) * this.SPEED_SMOOTHING;
 
     // Gradually decrease speed when not moving
     this.speed *= 0.92;
 
-    // Clamp to prevent visual noise
-    const clampedSpeed = Math.max(0, Math.min(1, this.smoothedSpeed));
+    // Only update CSS variables if enough time has passed (throttling)
+    if (now - this.lastUpdateTime >= this.UPDATE_THROTTLE) {
+      // Clamp to prevent visual noise
+      const clampedSpeed = Math.max(0, Math.min(1, this.smoothedSpeed));
 
-    // Calculate accent intensity (1.0 to 1.25 based on cursor speed)
-    // Subtle boost to avoid overwhelming the design
-    const accentIntensity = 1 + (clampedSpeed * 0.25);
+      // Calculate accent intensity (1.0 to 1.15 based on cursor speed)
+      // Reduced from 1.25 to 1.15 for more subtle effect
+      const accentIntensity = 1 + (clampedSpeed * 0.15);
 
-    // Set CSS variables for use in styles
-    document.documentElement.style.setProperty('--cursor-speed', clampedSpeed.toFixed(3));
-    document.documentElement.style.setProperty('--accent-intensity', accentIntensity.toFixed(3));
+      // Set CSS variables for use in styles
+      document.documentElement.style.setProperty('--cursor-speed', clampedSpeed.toFixed(2));
+      document.documentElement.style.setProperty('--accent-intensity', accentIntensity.toFixed(2));
+
+      this.lastUpdateTime = now;
+    }
 
     this.rafId = requestAnimationFrame(this.updateCSSVariable);
   }

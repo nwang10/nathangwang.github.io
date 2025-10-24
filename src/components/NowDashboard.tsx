@@ -52,11 +52,11 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
     return () => clearInterval(refreshInterval);
   }, []);
 
-  // Rotate activity every 5 seconds
+  // Rotate activity every 8 seconds (reduced frequency for performance)
   useEffect(() => {
     const activityInterval = setInterval(() => {
       setActivityIndex((prev) => (prev + 1) % activities.length);
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(activityInterval);
   }, [activities.length]);
@@ -131,21 +131,13 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          whileHover={{ y: -4, boxShadow: '0 20px 30px -10px rgba(0, 0, 0, 0.2)' }}
+          whileHover={{ y: -2 }}
         >
-          {/* Animated background gradient */}
-          <motion.div
-            className="absolute inset-0 opacity-10"
+          {/* Static background gradient */}
+          <div
+            className="absolute inset-0 opacity-5"
             style={{
               background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-hover))'
-            }}
-            animate={{
-              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%']
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: 'linear'
             }}
           />
 
@@ -160,25 +152,15 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
             <AnimatePresence mode="wait">
               <motion.div
                 key={activityIndex}
-                initial={{ opacity: 0, x: 20, filter: 'blur(4px)' }}
-                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, x: -20, filter: 'blur(4px)' }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
                 className="flex items-center space-x-3"
               >
-                <motion.span
-                  className="text-4xl"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 10, -10, 0]
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    ease: 'easeInOut'
-                  }}
-                >
+                <span className="text-4xl">
                   {activities[activityIndex].icon}
-                </motion.span>
+                </span>
                 <span className="text-lg font-semibold">
                   {activities[activityIndex].text}
                 </span>
@@ -212,7 +194,7 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          whileHover={{ y: -4, boxShadow: '0 20px 30px -10px rgba(0, 0, 0, 0.2)' }}
+          whileHover={{ y: -2 }}
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold flex items-center">
@@ -282,21 +264,13 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          whileHover={{ y: -4, boxShadow: '0 20px 30px -10px rgba(0, 0, 0, 0.2)' }}
+          whileHover={{ y: -2 }}
         >
           {spotifyData.isPlaying && (
-            <motion.div
+            <div
               className="absolute inset-0 opacity-5"
               style={{
                 background: 'radial-gradient(circle at 50% 50%, #1DB954, transparent)'
-              }}
-              animate={{
-                scale: [1, 1.2, 1]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut'
               }}
             />
           )}
@@ -352,7 +326,7 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          whileHover={{ y: -4, boxShadow: '0 20px 30px -10px rgba(0, 0, 0, 0.2)' }}
+          whileHover={{ y: -2 }}
         >
           <h3 className="text-xl font-bold mb-4 flex items-center">
             <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,7 +371,7 @@ export const NowDashboard: React.FC<NowDashboardProps> = ({ mode = 'page', onClo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          whileHover={{ y: -4, boxShadow: '0 20px 30px -10px rgba(0, 0, 0, 0.2)' }}
+          whileHover={{ y: -2 }}
         >
           <h3 className="text-xl font-bold mb-4 flex items-center">
             <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
