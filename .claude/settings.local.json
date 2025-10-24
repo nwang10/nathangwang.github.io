@@ -11,7 +11,9 @@
       "Bash(git remote add:*)",
       "Bash(git push:*)",
       "Bash(gh repo view:*)",
-      "Bash(git remote set-url:*)"
+      "Bash(git remote set-url:*)",
+      "Bash(if exist .git rmdir /s /q .git)",
+      "Bash(npx gh-pages -d dist)"
     ],
     "deny": [],
     "ask": []
